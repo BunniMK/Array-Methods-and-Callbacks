@@ -53,9 +53,12 @@ Use the higher-order function getWinners to do the following:
 4. Returns the names of all winning countries in an array called `winners` */ 
 // - Do not calc overtime //
 function getWinners(arr, getFinalsCB) {
+    //Empty array to push the new data into
    const winners = [];
+   // The away and home goals totalled
    const away = getFinalsCB(arr).map(item => item["Away Team Goals"]);
    const home = getFinalsCB(arr).map(item => item["Home Team Goals"]);
+   // iterating through the array to determine winners
    for(let i = 0; i < home.length; i++){
        if (home[i] > away[i]){
            winners.push(getFinalsCB(arr)[i]["Home Team Name"]);
@@ -82,9 +85,10 @@ hint: the strings returned need to exactly match the string in step 4.
 function getWinnersByYear(arr, getYearsCB, getWinnersCB) {
     const years = getYearsCB(arr, getFinals);
     const winners = getWinnersCB(arr, getFinals);
-    const doit =[];
+    return winners.map((item , index) => `In ${years[index]}, ${item} won the world cup!`)
 }
-//  console.log(getWinnersByYear(fifaData,getFinals,getWinners));
+            // Tested - 
+            // console.log(getWinnersByYear(fifaData,getYears,getWinners));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function getAverageGoals to do the following: 
@@ -97,7 +101,7 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 function getAverageGoals(getFinalsCB) {
-    // With the reduce function we use the current value to be the starting value each time. Next is what is added to current value next. 0 is 
+    // With the reduce function we use the current value to be the starting value each time. Next is what is added to current value next. 0 is a starting total to get the reduce function to work correctly. 
    const total = getFinalsCB.reduce((current, next) => current + (next['Home Team Goals'] + next['Away Team Goals']),0);
    return (total / getFinalsCB.length).toFixed(2);
 }
