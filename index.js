@@ -53,20 +53,25 @@ Use the higher-order function getWinners to do the following:
 4. Returns the names of all winning countries in an array called `winners` */ 
 // - Do not calc overtime //
 function getWinners(arr, getFinalsCB) {
-    //Empty array to push the new data into
-   const winners = [];
-   // The away and home goals totalled
-   const away = getFinalsCB(arr).map(item => item["Away Team Goals"]);
-   const home = getFinalsCB(arr).map(item => item["Home Team Goals"]);
-   // iterating through the array to determine winners
-   for(let i = 0; i < home.length; i++){
-       if (home[i] > away[i]){
-           winners.push(getFinalsCB(arr)[i]["Home Team Name"]);
-       } else if (home[i] < away[i]){
-        winners.push(getFinalsCB(arr)[i]["Away Team Name"]);
-   }
-} 
-return winners;
+//     //Empty array to push the new data into
+//    const winners = [];
+//    // The away and home goals totalled
+//    const away = getFinalsCB(arr).map(item => item["Away Team Goals"]);
+//    const home = getFinalsCB(arr).map(item => item["Home Team Goals"]);
+//    // iterating through the array to determine winners
+//    for(let i = 0; i < home.length; i++){
+//        if (home[i] > away[i]){
+//            winners.push(getFinalsCB(arr)[i]["Home Team Name"]);
+//        } else if (home[i] < away[i]){
+//         winners.push(getFinalsCB(arr)[i]["Away Team Name"]);
+//    }
+// } 
+// return winners;
+
+
+//The way more simple way to do it.
+return getFinalsCB(arr).map( item => item['Home Team Goals'] > item['Away Team Goals'] ? item['Home Team Name'] : item['Away Team Name']);
+
 }
 
         // tested -
